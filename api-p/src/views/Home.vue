@@ -2,20 +2,27 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <h1 class="btn-c">
-      <button value="1">episode 1</button>
-  </h1>
+    <div class="btn-c" v-for="episode in episodes" v-bind:key="episode.name">
+      <button value="1">{{episode.name}}</button>
+  </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      episodes: [{
+        name: "Pilot",
+      },{
+        name: "Lawnmower Dog",
+      },{
+        name: "Anatomy Park"
+      }]
+    }
   }
 }
 fetch('https://rickandmortyapi.com/api/episode')
@@ -23,7 +30,7 @@ fetch('https://rickandmortyapi.com/api/episode')
 return data.json();
 })
 .then(data => {
-console.log(data.results[0].name);
+console.log(data.results);
 });
 </script>
 
