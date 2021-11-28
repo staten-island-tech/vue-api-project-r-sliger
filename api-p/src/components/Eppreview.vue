@@ -1,47 +1,65 @@
 <template>
   <div>
-      <ul class= "episode-table">
-        <li 
-        class="episode-list-item" 
-        v-for="episode in episodes" 
-        :key="episode.name"
-        >
-        <Eppreview :episode="episode" />
-        </li>
-      </ul>    
+      <router-link :to="EpisodePath" class="link">
+        <div class="ep-container">
+            <h1 id="Query">
+             {{episode.id}}.
+             {{episode.name}}
+            </h1>
+      </div>
+      </router-link>
   </div>
 </template>
 
 <script>
-import Eppreview from "./Eppreview.vue"
 export default {
-    name: "Eplist",
-    data(){
-        return{episodes: [],
-        epid: null,};
+    name: "Eppreview",
+    props: ["episode"],
+    data() {
+        return{
+            singeEp: {},
+            epid: null,
+        };
     },
-    created: function () {
+    mounted: function(){
         this.fetchData();
+
     },
     methods:{
         fetchData: async function(){
             try {
                 const result = await fetch(
-                    `https://rickandmortyapi.com/api/episode`
+                    `https://rickandmortyapi.com/api/episode/${this.episode.id}`
                 );
-                const data = await result.json();
-                this.episodes = data.results;
+                const singleEP = await result.json();
+                this.singleEP = singleEP;
+                console.log(this.episode.id)
+                 console.log(this.singleEP);
+    
             } catch (error) {
-                alert(error);
+              console.log(error)  
             }
-        }
+        },
     },
-    components: { Eppreview },
+    computed: {
+        EpisodePath:function(){
+            return `/Episode/${this.episode.id}`;
+        }
+    }
 };
-
 </script>
 
 <style>
+#query {
+  color: #111;
+  font-size: 2rem;
+}
+.ep-container {
+  background-color: #999;
+  padding: 2rem;
+  color: #111;
+  font-size: 2.5rem;
+}
 html,
 body,
 * {
