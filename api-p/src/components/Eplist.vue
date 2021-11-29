@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="h1">Find the date every Rick And Morty Episode came out.</h1>
       <ul class= "episode-table">
         <li 
         class="episode-list-item" 
@@ -8,7 +9,7 @@
         >
         <Eppreview :episode="episode" />
         </li>
-      </ul>    
+      </ul>   
   </div>
 </template>
 
@@ -90,5 +91,9 @@ html {
 }
 .episode-list-item:hover {
   transform: scale(1.1);
+}
+.h1{
+  font-size: 4rem;
+  margin: 4rem;
 }
 </style>
