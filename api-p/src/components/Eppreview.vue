@@ -70,7 +70,7 @@ body,
   box-sizing: border-box;
 }
 html {
-  background-color: #111;
+  background-color: green;
 }
 .home {
   background-color: #111;
